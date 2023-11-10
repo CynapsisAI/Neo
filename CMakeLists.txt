@@ -16,4 +16,6 @@ include_directories(${inc})
 add_executable(Neo main.cpp
         inc/neo.hpp
         inc/array.hpp
+        inc/operations.hpp
+        src/operations.cpp
 )
