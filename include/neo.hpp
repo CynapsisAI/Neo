@@ -7,10 +7,4 @@
 
 #include "array.hpp"
 
-
-namespace neo{
-	class Array;
-
-}
-
 #endif //NEO_NEO_HPP

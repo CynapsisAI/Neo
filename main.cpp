@@ -1,10 +1,10 @@
 #include <iostream>
-#include "inc/array.hpp"
+#include "include/neo.hpp"
 
 int main() {
 
-	Array<int> array({1,2,3});
+	neo::Array<int> array{1,2,3,4,5};
+  std::cout<<array<<std::endl;
 
-	std::cout << array << std::endl;
 	return 0;
 }
