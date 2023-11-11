@@ -38,6 +38,7 @@ namespace neo {
 		}
 
 		~shape(){
+			std::cout<<"Destroying Shape. Dim: "<<_dim<<std::endl;
 			delete[] _shape;
 			_shape = nullptr;
 		}

@@ -27,8 +27,10 @@ namespace neo{
     // Construct + Destructor
     array(std::initializer_list<T> list);
 	  array(T* list, std::size_t cap);
-	  array(shape shape);
-	  ~array();
+		array(std::size_t size);
+
+
+	  void delete_array();
 
     // Getters
     std::size_t size() const;
@@ -49,6 +51,8 @@ namespace neo{
     //    Array Addition +
     template<typename U>
     array<T> operator+(array<U> &array2);
+
+	  void detailed_output();
 
   };
 }
@@ -78,23 +82,18 @@ inline neo::array<T>::array(T* list, std::size_t cap) {
   _array = list;
 }
 
+
 // Constructor
 template <typename T>
-inline neo::array<T>::array(neo::shape shape) {
-	_size = shape.upper_dim();
+inline neo::array<T>::array(std::size_t size) {
+	_size = size;
 	_array = new T[_size];
 	for (std::size_t i{}; i < _size; i++){
 		_array[i] = 0;
 	}
+
 }
 
-// Destructor
-template <typename T>
-inline neo::array<T>::~array(){
-	std::cout<<"Array Destructor Called"<<std::endl;
-  delete[] _array;
-  _array = nullptr;
-}
 
 template <typename T>
 inline std::size_t neo::array<T>::size() const{
@@ -165,8 +164,6 @@ inline neo::array<T> neo::array<T>::operator+(neo::array<U> &array2){
 template <typename T>
 inline std::ostream &operator<<(std::ostream &s, const neo::array<T> &array){
   T* arr = array.values();
-  std::cout<<"neo::array"<<std::endl;
-  std::cout<<"Type: "<<typeid(T).name()<<"  Size: "<<array.size()<<std::endl;
   s<<"[";
   for (std::size_t i{}; i<array.size(); i++){
     if (i != array.size()-1)
@@ -179,8 +176,28 @@ inline std::ostream &operator<<(std::ostream &s, const neo::array<T> &array){
 	return s;
 }
 
+// Output Operator <<
+template <typename T>
+inline void neo::array<T>::detailed_output(){
+	T* arr = _array;
+	std::cout<<"neo::array"<<std::endl;
+	std::cout<<"Type: "<<typeid(T).name()<<"  Size: "<<_size<<std::endl;
+	std::cout<<"[";
+	for (std::size_t i{}; i<_size; i++){
+		if (i != _size-1)
+			std::cout<<arr[i]<<", ";
+		else
+			std::cout<<arr[i];
+	}
+	std::cout<<"]"<<std::endl;
 
+}
 
+template <typename T>
+inline void neo::array<T>::delete_array(){
+	delete[] _array;
+	_array = nullptr;
+}
 
 
 

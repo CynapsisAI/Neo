@@ -5,10 +5,12 @@
 #include <string>
 
 int main() {
-	neo::shape shape = neo::shape{1,2,3};
-	neo::ndarray<int> arr(shape);
+	neo::ndarray<int> arr({3,2,3});
 
-	//std::cout<<arr<<std::endl;
+
+	std::cout<<arr<<std::endl;
+
+	std::cout<<arr<<std::endl;
 
 	return 0;
 }
