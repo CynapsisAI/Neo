@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <typeinfo>
+#include "structs.hpp"
 
 
 /*
@@ -17,20 +18,21 @@
 
 namespace neo{
   template <typename T>
-  class Array{
+  class array{
   private:
     std::size_t _size{};
     T* _array;
 
   public:
     // Construct + Destructor
-    Array(std::initializer_list<T> list);
-    Array(T* list, std::size_t cap);
-    ~Array();
+    array(std::initializer_list<T> list);
+	  array(T* list, std::size_t cap);
+	  array(shape shape);
+	  ~array();
 
     // Getters
     std::size_t size() const;
-    T* array() const;
+    T* values() const;
 
     // Operators
     //    Array Assignment/Access []
@@ -38,23 +40,22 @@ namespace neo{
 
     //    Scalar Multiply *
     template <typename type>
-    Array<T> operator*(type x) const;
+    array<T> operator*(type x) const;
 
     //    Scalar Addition +
     template <typename type>
-    Array<T> operator+(type x) const;
+    array<T> operator+(type x) const;
 
     //    Array Addition +
     template<typename U>
-    Array<T> operator+(Array<U> &array2);
-
+    array<T> operator+(array<U> &array2);
 
   };
 }
 
 // Output Operator <<
 template <typename T>
-std::ostream &operator<<(std::ostream &s, const neo::Array<int> &array);
+std::ostream &operator<<(std::ostream &s, const neo::array<int> &array);
 
 
 
@@ -62,33 +63,46 @@ std::ostream &operator<<(std::ostream &s, const neo::Array<int> &array);
  * Definitions
  */
 
+// Constructor
 template <typename T>
-inline neo::Array<T>::Array(std::initializer_list<T> list) {
+inline neo::array<T>::array(std::initializer_list<T> list) {
 	_size = list.size();
   _array = new T[_size];
   std::copy(list.begin(), list.end(), _array);
 }
 
+// Constructor
 template <typename T>
-inline neo::Array<T>::Array(T* list, std::size_t cap) {
+inline neo::array<T>::array(T* list, std::size_t cap) {
   _size = cap;
   _array = list;
 }
 
-
+// Constructor
 template <typename T>
-inline neo::Array<T>::~Array(){
+inline neo::array<T>::array(neo::shape shape) {
+	_size = shape.upper_dim();
+	_array = new T[_size];
+	for (std::size_t i{}; i < _size; i++){
+		_array[i] = 0;
+	}
+}
+
+// Destructor
+template <typename T>
+inline neo::array<T>::~array(){
+	std::cout<<"Array Destructor Called"<<std::endl;
   delete[] _array;
   _array = nullptr;
 }
 
 template <typename T>
-inline std::size_t neo::Array<T>::size() const{
+inline std::size_t neo::array<T>::size() const{
 	return _size;
 }
 
 template<typename T>
-T *neo::Array<T>::array() const{
+T *neo::array<T>::values() const{
   return _array;
 }
 
@@ -99,7 +113,7 @@ T *neo::Array<T>::array() const{
 
 // Array Assignment/Access []
 template<typename T>
-inline T &neo::Array<T>::operator[](std::size_t index) {
+inline T &neo::array<T>::operator[](std::size_t index) {
   if (index >= _size) {
     std::cout<<"Error: Array index out of bounds. Index: "<<index<<", Size: "<<_size<<std::endl;
     exit(0);
@@ -110,29 +124,29 @@ inline T &neo::Array<T>::operator[](std::size_t index) {
 // Scalar Multiply *
 template<typename T>
 template<typename type>
-inline neo::Array<T> neo::Array<T>::operator*(type x) const{
+inline neo::array<T> neo::array<T>::operator*(type x) const{
   T *tmp = new T[_size];
   for (std::size_t i{}; i < _size; i++) {
     tmp[i] = _array[i] * x;
   }
-  return neo::Array<T>(tmp, _size);
+  return neo::array<T>(tmp, _size);
 }
 
 // Scalar Addition +
 template<typename T>
 template<typename type>
-inline neo::Array<T> neo::Array<T>::operator+(type x) const{
+inline neo::array<T> neo::array<T>::operator+(type x) const{
   T *tmp = new T[_size];
   for (std::size_t i{}; i < _size; i++) {
     tmp[i] = _array[i] + x;
   }
-  return neo::Array<T>(tmp, _size);
+  return neo::array<T>(tmp, _size);
 }
 
 // Array Addition +
 template<typename T>
 template<typename U>
-inline neo::Array<T> neo::Array<T>::operator+(neo::Array<U> &array2){
+inline neo::array<T> neo::array<T>::operator+(neo::array<U> &array2){
   // Ensure both arrays are same size
   if (_size != array2.size()){
     std::cout<<"Error: Arrays must be same size. Array1: "<<_size<<", Array2: "<<array2.size()<<std::endl;
@@ -143,15 +157,15 @@ inline neo::Array<T> neo::Array<T>::operator+(neo::Array<U> &array2){
   for (std::size_t i{}; i < _size; i++) {
     tmp[i] = _array[i] + array2[i];
   }
-  return neo::Array<T>(tmp, _size);
+  return neo::array<T>(tmp, _size);
 }
 
 
 // Output Operator <<
 template <typename T>
-inline std::ostream &operator<<(std::ostream &s, const neo::Array<T> &array){
-  T* arr = array.array();
-  std::cout<<"neo::Array"<<std::endl;
+inline std::ostream &operator<<(std::ostream &s, const neo::array<T> &array){
+  T* arr = array.values();
+  std::cout<<"neo::array"<<std::endl;
   std::cout<<"Type: "<<typeid(T).name()<<"  Size: "<<array.size()<<std::endl;
   s<<"[";
   for (std::size_t i{}; i<array.size(); i++){

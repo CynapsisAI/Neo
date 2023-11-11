@@ -18,4 +18,7 @@ add_executable(Neo main.cpp
         include/array.hpp
         include/operations.hpp
         src/operations.cpp
+        include/ndarray.hpp
+        include/structs.hpp
+        src/structs_ostream.cpp
 )
