@@ -203,17 +203,15 @@ inline int neo::ndarray<T>::get(Ta... args) {
 
 // Array Assignment/Access []
 //
-template<typename T>
-inline neo::ndarray<T>& neo::ndarray<T>::operator[](std::size_t i) {
-	constexpr std::size_t n = sizeof...(indices);
-	std::cout<<n<<std::endl;
-	static_assert(n >= 1, "must pass at least one argument");
-	std::cout << n << std::endl;
-	auto&& tuple = std::tie(indices...);
-	std::cout<<std::get<0>(tuple)<<std::endl;
-
-
-
-}
+//template<typename T>
+//inline neo::ndarray<T>& neo::ndarray<T>::operator[](std::size_t i) {
+//	constexpr std::size_t n = sizeof...(indices);
+//	std::cout<<n<<std::endl;
+//	static_assert(n >= 1, "must pass at least one argument");
+//	std::cout << n << std::endl;
+//	auto&& tuple = std::tie(indices...);
+//	std::cout<<std::get<0>(tuple)<<std::endl;
+//
+//}
 
 #endif // NEO_NDARRAY_HPP
