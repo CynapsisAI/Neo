@@ -10,6 +10,9 @@
 #include <typeinfo>
 #include "structs.hpp"
 #include "array.hpp"
+#include <cstdarg>
+#include "stdarg.h"
+
 
 
 namespace neo {
@@ -44,7 +47,10 @@ namespace neo {
 		ndarray<T>** values() const{ return _array; };
 		array<T> base_array() const{return *_base_array; };
 
+    template<typename... Ta>
+    int get(Ta... args);
 		//    Array Assignment/Access []
+    ndarray<T>& operator[](std::size_t index);
 
 
 
@@ -168,23 +174,47 @@ inline std::ostream &operator<<(std::ostream &s, neo::ndarray<T> &array){
 }
 
 
+// Array Assignment/Access []
+template<typename T>
+inline auto &neo::ndarray<T>::operator[](std::size_t index) {
+  if (index >= _size) {
+    std::cout<<"Error: Array index out of bounds. Index: "<<index<<", Size: "<<_size<<std::endl;
+    exit(0);
+  }
+  if (_dim == 1){
+    return _base_array[index];
+  }
+  return _array[index];
+}
+
+template <typename T>
+template <typename... Ta>
+inline int neo::ndarray<T>::get(Ta... args) {
+  constexpr std::size_t n = sizeof...(Ta);
+  static_assert(n >= 1, "must pass at least one argument");
+  std::cout << n << std::endl;
+  int arr[n]{args...};
+
+  for (std::size_t i{}; i < n; i++){
+    std::cout<<arr[i]<<std::endl;
+  }
+
+}
 
 // Array Assignment/Access []
 //
-//template<typename T>
-//template<typename ...Indices>
-//inline neo::ndarray& neo::ndarray<T>::operator()(Indices ...indices) {
-//
-//	constexpr std::size_t n = sizeof...(indices);
-//	std::cout<<n<<std::endl;
-//	static_assert(n >= 1, "must pass at least one argument");
-//	std::cout << n << std::endl;
-//	auto&& tuple = std::tie(indices...);
-//	std::cout<<std::get<0>(tuple)<<std::endl;
-//
-//
-//	return 0;
-//}
+template<typename T>
+inline neo::ndarray<T>& neo::ndarray<T>::operator[](std::size_t i) {
+	constexpr std::size_t n = sizeof...(indices);
+	std::cout<<n<<std::endl;
+	static_assert(n >= 1, "must pass at least one argument");
+	std::cout << n << std::endl;
+	auto&& tuple = std::tie(indices...);
+	std::cout<<std::get<0>(tuple)<<std::endl;
+
+
+
+}
 
 
 #endif //NEO_NDARRAY_HPP

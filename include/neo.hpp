@@ -6,5 +6,7 @@
 #define NEO_NEO_HPP
 
 #include "array.hpp"
+#include "ndarray.hpp"
+#include "structs.hpp"
 
 #endif //NEO_NEO_HPP
