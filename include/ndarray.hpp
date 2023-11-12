@@ -21,18 +21,18 @@ namespace neo {
 
 	private:
 		std::size_t _size{1};
-		unsigned int* _shape{};
+		unsigned int *_shape{};
 		unsigned int _dim{};
-		ndarray<T>** _array{};
-		array<T>* _base_array{};
+		ndarray<T> **_array{};
+		array<T> *_base_array{};
 
-		ndarray<T>** recursive_helper(unsigned int* shape, unsigned int dim);
+		ndarray<T> **recursive_helper(unsigned int *shape, unsigned int dim);
 
 	public:
 		// Default
 		ndarray(std::initializer_list<unsigned int> shape);
 
-		ndarray(unsigned int* shape, int dim);
+		ndarray(unsigned int *shape, int dim);
 
 		// Destructor
 		~ndarray();
@@ -41,11 +41,11 @@ namespace neo {
 
 
 		// Getters
-		std::size_t size() const{ return _size; }
-		unsigned int* shape() { return _shape; }
+		std::size_t size() const { return _size; }
+		shape_obj shape() { return shape_obj(_dim, _shape); }
 		unsigned int dim() { return _dim; }
-		ndarray<T>** values() const{ return _array; };
-		array<T> base_array() const{return *_base_array; };
+		ndarray<T> **values() const { return _array; };
+		array<T> base_array() const { return *_base_array; };
 
     template<typename... Ta>
     int get(Ta... args);
@@ -149,7 +149,7 @@ inline void recursive_output(neo::ndarray<T> &array){
 template <typename T>
 inline std::ostream &operator<<(std::ostream &s, neo::ndarray<T> &array){
 
-	unsigned int* shape = array.shape();
+	unsigned int *shape = array.shape();
 	unsigned int dim = array.dim();
 
 	if (dim <= 1){
@@ -216,5 +216,4 @@ inline neo::ndarray<T>& neo::ndarray<T>::operator[](std::size_t i) {
 
 }
 
-
-#endif //NEO_NDARRAY_HPP
+#endif // NEO_NDARRAY_HPP
