@@ -39,6 +39,7 @@ namespace neo{
     // Operators
     //    Array Assignment/Access []
     T& operator[](std::size_t index);
+    T& get(std::size_t index);
 
     //    Scalar Multiply *
     template <typename type>
@@ -113,6 +114,15 @@ T *neo::array<T>::values() const{
 // Array Assignment/Access []
 template<typename T>
 inline T &neo::array<T>::operator[](std::size_t index) {
+  if (index >= _size) {
+    std::cout<<"Error: Array index out of bounds. Index: "<<index<<", Size: "<<_size<<std::endl;
+    exit(0);
+  }
+  return _array[index];
+}
+
+template<typename T>
+inline T &neo::array<T>::get(std::size_t index) {
   if (index >= _size) {
     std::cout<<"Error: Array index out of bounds. Index: "<<index<<", Size: "<<_size<<std::endl;
     exit(0);

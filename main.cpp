@@ -5,10 +5,11 @@
 #include <string>
 
 int main() {
-	neo::ndarray<int> arr({2,2});
+	neo::ndarray<int> arr({2,2,3});
+  std::cout<<arr<<std::endl;
 
 
-  arr.get(1,3,6,4,5);
+  arr.get(1,1,1);
 
 	return 0;
 }

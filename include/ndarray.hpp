@@ -11,7 +11,9 @@
 #include "structs.hpp"
 #include "array.hpp"
 #include <cstdarg>
+#include <cassert>
 #include "stdarg.h"
+#include <string>
 
 
 
@@ -149,7 +151,7 @@ inline void recursive_output(neo::ndarray<T> &array){
 template <typename T>
 inline std::ostream &operator<<(std::ostream &s, neo::ndarray<T> &array){
 
-	unsigned int *shape = array.shape();
+	unsigned int *shape = array.shape().getShape();
 	unsigned int dim = array.dim();
 
 	if (dim <= 1){
@@ -173,32 +175,50 @@ inline std::ostream &operator<<(std::ostream &s, neo::ndarray<T> &array){
 	return s;
 }
 
+void assert_check(bool expr, std::string message){
+  if(expr) return;
 
-// Array Assignment/Access []
-template<typename T>
-inline auto &neo::ndarray<T>::operator[](std::size_t index) {
-  if (index >= _size) {
-    std::cout<<"Error: Array index out of bounds. Index: "<<index<<", Size: "<<_size<<std::endl;
-    exit(0);
-  }
-  if (_dim == 1){
-    return _base_array[index];
-  }
-  return _array[index];
+  std::cout<<"Error: "<<message<<std::endl;
+  exit(0);
+}
+
+void check_bounds(std::size_t cap, std::size_t index){
+  assert_check(index < cap, "Index out of bounds");
 }
 
 template <typename T>
 template <typename... Ta>
 inline int neo::ndarray<T>::get(Ta... args) {
   constexpr std::size_t n = sizeof...(Ta);
-  static_assert(n >= 1, "must pass at least one argument");
-  std::cout << n << std::endl;
+  assert_check(n >= 1, "Must pass at least one argument");
+  assert_check(n <= _dim, "Indexing deeper than number of dimensions");
   int arr[n]{args...};
 
-  for (std::size_t i{}; i < n; i++){
-    std::cout<<arr[i]<<std::endl;
+  if (_dim == 1) {
+    check_bounds(_base_array->size(), arr[0]);
+    std::cout<<_base_array[arr[0]]<< std::endl;
+    return 0;
   }
 
+  check_bounds(_shape[0], arr[0]);
+  ndarray<T>* running_array{_array[arr[0]]};
+
+  for (std::size_t i{1}; i < n; i++){
+    std::size_t index = arr[i];
+    std::size_t cap = running_array->_shape[0];
+    check_bounds(cap, index);
+
+
+    if (running_array->_dim == 1){
+      array<T> base = *running_array->_base_array;
+      std::cout<<base[index]<<std::endl;
+      return 0;
+    }
+    running_array = running_array->_array[index];
+  }
+  std::cout<<*running_array<<std::endl;
+
+  return 0;
 }
 
 // Array Assignment/Access []
