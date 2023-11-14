@@ -36,7 +36,6 @@ namespace neo {
     template<typename... Ta>
     tensor<T>& get(Ta... args);
 
-    tensor* sub_tensor(unsigned int index);
     std::pair<unsigned int, unsigned int> loc_interval(int* args, unsigned int cap);
 
 
