@@ -1,15 +1,12 @@
 #include <iostream>
 #include "include/neo.hpp"
-#include "structs.hpp"
-#include "ndarray.hpp"
-#include <string>
 
 int main() {
-	neo::ndarray<int> arr({2,2,3});
-  std::cout<<arr<<std::endl;
+	neo::tensor<int> tens({2,2,3});
 
+  int* arr = new int[2]{1,1};
+  tens.loc_interval(arr, 2);
 
-  arr.get(1,1,1);
 
 	return 0;
 }

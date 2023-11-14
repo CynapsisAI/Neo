@@ -71,7 +71,7 @@ std::ostream &operator<<(std::ostream &s, const neo::shape_obj &shape_obj)
 // 			_shape = shape;
 // 			_dim = dim;
 
-// 			for (std::size_t i{}; i < _dim; i++)
+// 			for (unsigned int i{}; i < _dim; i++)
 // 				_size *= _shape[i];
 // 		}
 

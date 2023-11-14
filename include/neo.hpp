@@ -8,6 +8,7 @@
 #include "array.hpp"
 #include "ndarray.hpp"
 #include "structs.hpp"
+#include "tensor.hpp"
 
 namespace neo
 {

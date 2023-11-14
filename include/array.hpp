@@ -20,26 +20,26 @@ namespace neo{
   template <typename T>
   class array{
   private:
-    std::size_t _size{};
+    unsigned int _size{};
     T* _array;
 
   public:
     // Construct + Destructor
     array(std::initializer_list<T> list);
-	  array(T* list, std::size_t cap);
-		array(std::size_t size);
+	  array(T* list, unsigned int cap);
+		array(unsigned int size);
 
 
 	  void delete_array();
 
     // Getters
-    std::size_t size() const;
+    unsigned int size() const;
     T* values() const;
 
     // Operators
     //    Array Assignment/Access []
-    T& operator[](std::size_t index);
-    T& get(std::size_t index);
+    T& operator[](unsigned int index);
+    T& get(unsigned int index);
 
     //    Scalar Multiply *
     template <typename type>
@@ -78,7 +78,7 @@ inline neo::array<T>::array(std::initializer_list<T> list) {
 
 // Constructor
 template <typename T>
-inline neo::array<T>::array(T* list, std::size_t cap) {
+inline neo::array<T>::array(T* list, unsigned int cap) {
   _size = cap;
   _array = list;
 }
@@ -86,10 +86,10 @@ inline neo::array<T>::array(T* list, std::size_t cap) {
 
 // Constructor
 template <typename T>
-inline neo::array<T>::array(std::size_t size) {
+inline neo::array<T>::array(unsigned int size) {
 	_size = size;
 	_array = new T[_size];
-	for (std::size_t i{}; i < _size; i++){
+	for (unsigned int i{}; i < _size; i++){
 		_array[i] = 0;
 	}
 
@@ -97,7 +97,7 @@ inline neo::array<T>::array(std::size_t size) {
 
 
 template <typename T>
-inline std::size_t neo::array<T>::size() const{
+inline unsigned int neo::array<T>::size() const{
 	return _size;
 }
 
@@ -113,7 +113,7 @@ T *neo::array<T>::values() const{
 
 // Array Assignment/Access []
 template<typename T>
-inline T &neo::array<T>::operator[](std::size_t index) {
+inline T &neo::array<T>::operator[](unsigned int index) {
   if (index >= _size) {
     std::cout<<"Error: Array index out of bounds. Index: "<<index<<", Size: "<<_size<<std::endl;
     exit(0);
@@ -122,7 +122,7 @@ inline T &neo::array<T>::operator[](std::size_t index) {
 }
 
 template<typename T>
-inline T &neo::array<T>::get(std::size_t index) {
+inline T &neo::array<T>::get(unsigned int index) {
   if (index >= _size) {
     std::cout<<"Error: Array index out of bounds. Index: "<<index<<", Size: "<<_size<<std::endl;
     exit(0);
@@ -135,7 +135,7 @@ template<typename T>
 template<typename type>
 inline neo::array<T> neo::array<T>::operator*(type x) const{
   T *tmp = new T[_size];
-  for (std::size_t i{}; i < _size; i++) {
+  for (unsigned int i{}; i < _size; i++) {
     tmp[i] = _array[i] * x;
   }
   return neo::array<T>(tmp, _size);
@@ -146,7 +146,7 @@ template<typename T>
 template<typename type>
 inline neo::array<T> neo::array<T>::operator+(type x) const{
   T *tmp = new T[_size];
-  for (std::size_t i{}; i < _size; i++) {
+  for (unsigned int i{}; i < _size; i++) {
     tmp[i] = _array[i] + x;
   }
   return neo::array<T>(tmp, _size);
@@ -163,7 +163,7 @@ inline neo::array<T> neo::array<T>::operator+(neo::array<U> &array2){
   }
 
   T *tmp = new T[_size];
-  for (std::size_t i{}; i < _size; i++) {
+  for (unsigned int i{}; i < _size; i++) {
     tmp[i] = _array[i] + array2[i];
   }
   return neo::array<T>(tmp, _size);
@@ -175,7 +175,7 @@ template <typename T>
 inline std::ostream &operator<<(std::ostream &s, const neo::array<T> &array){
   T* arr = array.values();
   s<<"[";
-  for (std::size_t i{}; i<array.size(); i++){
+  for (unsigned int i{}; i<array.size(); i++){
     if (i != array.size()-1)
       s<<arr[i]<<", ";
     else
@@ -193,7 +193,7 @@ inline void neo::array<T>::detailed_output(){
 	std::cout<<"neo::array"<<std::endl;
 	std::cout<<"Type: "<<typeid(T).name()<<"  Size: "<<_size<<std::endl;
 	std::cout<<"[";
-	for (std::size_t i{}; i<_size; i++){
+	for (unsigned int i{}; i<_size; i++){
 		if (i != _size-1)
 			std::cout<<arr[i]<<", ";
 		else
