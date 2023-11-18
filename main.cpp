@@ -1,15 +1,17 @@
 #include <iostream>
 #include "include/neo.hpp"
-#include "structs.hpp"
-#include "ndarray.hpp"
-#include <string>
 
 int main() {
-	neo::ndarray<int> arr({2,2,3});
-  std::cout<<arr<<std::endl;
+	neo::tensor<int> tens({2,2,3});
 
+  std::cout<<tens<<std::endl;
 
-  arr.get(1,1,1);
+  neo::tensor<int> flattened = tens.flatten();
+  std::cout<<flattened<<std::endl;
+
+  tens.get(0,0,0) = 3;
+  std::cout<<tens<<std::endl;
+
 
 	return 0;
 }

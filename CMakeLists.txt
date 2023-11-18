@@ -21,4 +21,4 @@ add_executable(Neo main.cpp
         include/ndarray.hpp
         include/structs.hpp
         src/structs_ostream.cpp
-)
+        include/tensor.hpp)
