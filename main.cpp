@@ -2,11 +2,15 @@
 #include "include/neo.hpp"
 
 int main() {
-	neo::tensor<int> tens({3,3,2});
+	neo::tensor<int> tens({2,2,3});
 
+  std::cout<<tens<<std::endl;
 
-	int* arr = new int[1]{2};
-	tens.loc_interval(arr, 1);
+  neo::tensor<int> flattened = tens.flatten();
+  std::cout<<flattened<<std::endl;
+
+  tens.get(0,0,0) = 3;
+  std::cout<<tens<<std::endl;
 
 
 	return 0;
