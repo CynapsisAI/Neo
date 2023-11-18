@@ -26,7 +26,6 @@ namespace neo {
   public:
     // Default
     tensor(std::initializer_list<unsigned int> shape);
-    tensor(unsigned int *shape, int dim);
     tensor(T* array, unsigned int *shape, int dim);
 
 		// Copy constructor
@@ -185,6 +184,17 @@ inline neo::tensor<T>& neo::tensor<T>::get(Ta... args) const{
 
 template <typename T>
 inline neo::tensor<T>& neo::tensor<T>::operator[](unsigned int i){
+  assert_check(i<_shape[0], "Out of bounds: Index out of bounds");
+
+  int arr[1]{(int)i};
+  std::pair<unsigned int, unsigned int> range = loc_interval(arr, 1);
+  neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+1, _dim-1);
+
+  return *new_tensor;
+}
+
+template <typename T>
+inline neo::tensor<T> neo::tensor<T>::operator[](unsigned int i) const{
   assert_check(i<_shape[0], "Out of bounds: Index out of bounds");
 
   int arr[1]{(int)i};
