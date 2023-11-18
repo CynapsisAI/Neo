@@ -4,13 +4,8 @@
 int main() {
 	neo::tensor<int> tens({2,2,3});
 
-  std::cout<<tens<<std::endl;
-
-  neo::tensor<int> flattened = tens.flatten();
-  std::cout<<flattened<<std::endl;
-
-  tens.get(0,0,0) = 3;
-  std::cout<<tens<<std::endl;
+  neo::tensor<int> scalar({1});
+  std::cout<<tens.get(1,1,3)<<std::endl;
 
 
 	return 0;

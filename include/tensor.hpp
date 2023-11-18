@@ -8,7 +8,7 @@
 #include <iostream>
 #include <numeric>
 #include "structs.hpp"
-
+#include "error.hpp"
 
 
 namespace neo {
@@ -57,7 +57,7 @@ namespace neo {
 		unsigned int size() const {return _size;}
 		unsigned int* shape() const {return _shape;}
 		T* array() const {return _array;}
-
+    T scalar() const { assert_check(_dim == 0,"Can only call scalar on tensor dim=0"); return _array[0];};
 
   };
 }
@@ -74,7 +74,7 @@ neo::tensor<T>::tensor(std::initializer_list<unsigned int> shape) {
   std::copy(shape.begin(), shape.end(), _shape);
   _size = std::accumulate( shape.begin(), shape.end(), 1, std::multiplies<unsigned int>() );
 
-  assert_check(_size > 0, "Error during Creation: Dimensions must be greater than 0");
+  assert_check(_size > 0, "During Creation: Sub-dimension cannot be 0");
 
   // Initialize to 0s
   _array = new T[_size]{0};
@@ -170,12 +170,14 @@ template <typename T>
 template <typename... Ta>
 inline neo::tensor<T>& neo::tensor<T>::get(Ta... args) const{
   constexpr unsigned int n = sizeof...(Ta);
-  assert_check(n >= 1, "Must pass at least one argument");
-  assert_check(n <= _dim, "Out of bounds: Indexing deeper than number of dimensions");
+  assert_check(n >= 1,"Must pass at least one argument");
+  assert_check(n <= _dim, "Indexing deeper than number of dimensions");
   int arr[n]{args...};
 
-  // Check that args are within dimensions
-
+  // Check that arguments are within bounds
+  for (std::size_t i{}; i < n; i++){
+    assert_check(arr[i]<_shape[i], "Index out of bounds for dimension");
+  }
 
   std::pair<unsigned int, unsigned int> range = loc_interval(arr, n);
   neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+n, _dim-n);
@@ -184,7 +186,7 @@ inline neo::tensor<T>& neo::tensor<T>::get(Ta... args) const{
 
 template <typename T>
 inline neo::tensor<T>& neo::tensor<T>::operator[](unsigned int i){
-  assert_check(i<_shape[0], "Out of bounds: Index out of bounds");
+  assert_check(i<_shape[0], "Index out of bounds");
 
   int arr[1]{(int)i};
   std::pair<unsigned int, unsigned int> range = loc_interval(arr, 1);
@@ -195,7 +197,7 @@ inline neo::tensor<T>& neo::tensor<T>::operator[](unsigned int i){
 
 template <typename T>
 inline neo::tensor<T> neo::tensor<T>::operator[](unsigned int i) const{
-  assert_check(i<_shape[0], "Out of bounds: Index out of bounds");
+  assert_check(i<_shape[0],"Index out of bounds");
 
   int arr[1]{(int)i};
   std::pair<unsigned int, unsigned int> range = loc_interval(arr, 1);
@@ -233,7 +235,7 @@ std::ostream& recurse_ostream(std::ostream &s, const neo::tensor<T> &tensor){
 
   unsigned int dim = tensor.dim();
 
-  if (dim == 1){
+  if (dim <= 1){
     for (std::size_t i{}; i < tensor.size(); i++){
       s<<tensor_array[i];
       if (i != (tensor.size()-1)){
