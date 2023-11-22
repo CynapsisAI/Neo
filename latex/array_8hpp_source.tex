@@ -1,0 +1,221 @@
+\doxysection{array.\+hpp}
+\hypertarget{array_8hpp_source}{}\label{array_8hpp_source}\index{include/array.hpp@{include/array.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ alial\ on\ 2023-\/11-\/10.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ NEO\_ARRAY\_HPP}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ NEO\_ARRAY\_HPP}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <typeinfo>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}structs.hpp"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Declarations}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }neo\{}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1array}{array}}\{}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \_size\{\};}
+\DoxyCodeLine{00024\ \ \ \ \ T*\ \_array;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ Construct\ +\ Destructor}}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{array}}(std::initializer\_list<T>\ list);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{array}}(T*\ list,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ cap);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{array}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ delete\_array();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ \ \ \ \ T*\ values()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Operators}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ \ \ \ Array\ Assignment/Access\ []}}
+\DoxyCodeLine{00041\ \ \ \ \ T\&\ operator[](\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00042\ \ \ \ \ T\&\ get(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ \ \ \ Scalar\ Multiply\ *}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ type>}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{array<T>}}\ operator*(type\ x)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//\ \ \ \ Scalar\ Addition\ +}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ type>}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{array<T>}}\ operator+(type\ x)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ \ \ \ Array\ Addition\ +}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{array<T>}}\ operator+(\mbox{\hyperlink{classneo_1_1array}{array<U>}}\ \&array2);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ detailed\_output();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \};}
+\DoxyCodeLine{00059\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ Output\ Operator\ <<}}
+\DoxyCodeLine{00062\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00063\ std::ostream\ \&operator<<(std::ostream\ \&s,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<int>}}\ \&array);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ *\ Definitions}}
+\DoxyCodeLine{00069\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00072\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00073\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::array}}(std::initializer\_list<T>\ list)\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \_size\ =\ list.size();}
+\DoxyCodeLine{00075\ \ \ \_array\ =\ \textcolor{keyword}{new}\ T[\_size];}
+\DoxyCodeLine{00076\ \ \ std::copy(list.begin(),\ list.end(),\ \_array);}
+\DoxyCodeLine{00077\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00080\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00081\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::array}}(T*\ list,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ cap)\ \{}
+\DoxyCodeLine{00082\ \ \ \_size\ =\ cap;}
+\DoxyCodeLine{00083\ \ \ \_array\ =\ list;}
+\DoxyCodeLine{00084\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00088\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00089\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::array}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \_size\ =\ size;}
+\DoxyCodeLine{00091\ \ \ \ \ \_array\ =\ \textcolor{keyword}{new}\ T[\_size];}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\{\};\ i\ <\ \_size;\ i++)\{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \_array[i]\ =\ 0;}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00100\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::size}}()\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{return}\ \_size;}
+\DoxyCodeLine{00102\ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00105\ T\ *\mbox{\hyperlink{classneo_1_1array}{neo::array<T>::values}}()\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordflow}{return}\ \_array;}
+\DoxyCodeLine{00107\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ *\ Operator\ Overloads}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{comment}{//\ Array\ Assignment/Access\ []}}
+\DoxyCodeLine{00115\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00116\ \textcolor{keyword}{inline}\ T\ \&\mbox{\hyperlink{classneo_1_1array}{neo::array<T>::operator[]}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index)\ \{}
+\DoxyCodeLine{00117\ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \_size)\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}Error:\ Array\ index\ out\ of\ bounds.\ Index:\ "{}}<<index<<\textcolor{stringliteral}{"{},\ Size:\ "{}}<<\_size<<std::endl;}
+\DoxyCodeLine{00119\ \ \ \ \ exit(0);}
+\DoxyCodeLine{00120\ \ \ \}}
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordflow}{return}\ \_array[index];}
+\DoxyCodeLine{00122\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00125\ \textcolor{keyword}{inline}\ T\ \&\mbox{\hyperlink{classneo_1_1array}{neo::array<T>::get}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ index)\ \{}
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \_size)\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}Error:\ Array\ index\ out\ of\ bounds.\ Index:\ "{}}<<index<<\textcolor{stringliteral}{"{},\ Size:\ "{}}<<\_size<<std::endl;}
+\DoxyCodeLine{00128\ \ \ \ \ exit(0);}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordflow}{return}\ \_array[index];}
+\DoxyCodeLine{00131\ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{comment}{//\ Scalar\ Multiply\ *}}
+\DoxyCodeLine{00134\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00135\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ type>}
+\DoxyCodeLine{00136\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>}}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::operator*}}(type\ x)\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00137\ \ \ T\ *tmp\ =\ \textcolor{keyword}{new}\ T[\_size];}
+\DoxyCodeLine{00138\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\{\};\ i\ <\ \_size;\ i++)\ \{}
+\DoxyCodeLine{00139\ \ \ \ \ tmp[i]\ =\ \_array[i]\ *\ x;}
+\DoxyCodeLine{00140\ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>}}(tmp,\ \_size);}
+\DoxyCodeLine{00142\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ Scalar\ Addition\ +}}
+\DoxyCodeLine{00145\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00146\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ type>}
+\DoxyCodeLine{00147\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>}}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::operator+}}(type\ x)\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00148\ \ \ T\ *tmp\ =\ \textcolor{keyword}{new}\ T[\_size];}
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\{\};\ i\ <\ \_size;\ i++)\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ tmp[i]\ =\ \_array[i]\ +\ x;}
+\DoxyCodeLine{00151\ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>}}(tmp,\ \_size);}
+\DoxyCodeLine{00153\ \}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{comment}{//\ Array\ Addition\ +}}
+\DoxyCodeLine{00156\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00157\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ U>}
+\DoxyCodeLine{00158\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>}}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::operator+}}(\mbox{\hyperlink{classneo_1_1array}{neo::array<U>}}\ \&array2)\{}
+\DoxyCodeLine{00159\ \ \ \textcolor{comment}{//\ Ensure\ both\ arrays\ are\ same\ size}}
+\DoxyCodeLine{00160\ \ \ \textcolor{keywordflow}{if}\ (\_size\ !=\ array2.size())\{}
+\DoxyCodeLine{00161\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}Error:\ Arrays\ must\ be\ same\ size.\ Array1:\ "{}}<<\_size<<\textcolor{stringliteral}{"{},\ Array2:\ "{}}<<array2.size()<<std::endl;}
+\DoxyCodeLine{00162\ \ \ \ \ exit(0);}
+\DoxyCodeLine{00163\ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ T\ *tmp\ =\ \textcolor{keyword}{new}\ T[\_size];}
+\DoxyCodeLine{00166\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\{\};\ i\ <\ \_size;\ i++)\ \{}
+\DoxyCodeLine{00167\ \ \ \ \ tmp[i]\ =\ \_array[i]\ +\ array2[i];}
+\DoxyCodeLine{00168\ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>}}(tmp,\ \_size);}
+\DoxyCodeLine{00170\ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{comment}{//\ Output\ Operator\ <<}}
+\DoxyCodeLine{00174\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00175\ \textcolor{keyword}{inline}\ std::ostream\ \&operator<<(std::ostream\ \&s,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>}}\ \&array)\{}
+\DoxyCodeLine{00176\ \ \ T*\ arr\ =\ array.values();}
+\DoxyCodeLine{00177\ \ \ s<<\textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{00178\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\{\};\ i<array.size();\ i++)\{}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ !=\ array.size()-\/1)}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ s<<arr[i]<<\textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ s<<arr[i];}
+\DoxyCodeLine{00183\ \ \ \}}
+\DoxyCodeLine{00184\ \ \ s<<\textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00187\ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{comment}{//\ Output\ Operator\ <<}}
+\DoxyCodeLine{00190\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00191\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::detailed\_output}}()\{}
+\DoxyCodeLine{00192\ \ \ \ \ T*\ arr\ =\ \_array;}
+\DoxyCodeLine{00193\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}neo::array"{}}<<std::endl;}
+\DoxyCodeLine{00194\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}Type:\ "{}}<<\textcolor{keyword}{typeid}(T).name()<<\textcolor{stringliteral}{"{}\ \ Size:\ "{}}<<\_size<<std::endl;}
+\DoxyCodeLine{00195\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\{\};\ i<\_size;\ i++)\{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ !=\ \_size-\/1)}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout<<arr[i]<<\textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout<<arr[i];}
+\DoxyCodeLine{00201\ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \ \ \ \ std::cout<<\textcolor{stringliteral}{"{}]"{}}<<std::endl;}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00207\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1array}{neo::array<T>::delete\_array}}()\{}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keyword}{delete}[]\ \_array;}
+\DoxyCodeLine{00209\ \ \ \ \ \_array\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00210\ \}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//NEO\_ARRAY\_HPP}}
+
+\end{DoxyCode}

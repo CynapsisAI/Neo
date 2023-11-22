@@ -13,6 +13,7 @@
 #include <cstdarg>
 #include <cassert>
 #include "stdarg.h"
+#include "error.hpp"
 #include <string>
 #include <numeric>
 
@@ -182,12 +183,6 @@ std::ostream &operator<<(std::ostream &s, neo::ndarray<T> &array){
 	return s;
 }
 
-void assert_check(bool expr, std::string message){
-  if(expr) return;
-
-  std::cout<<"Error: "<<message<<std::endl;
-  exit(0);
-}
 
 void check_bounds(unsigned int cap, unsigned int index){
   assert_check(index < cap, "Index out of bounds");
@@ -197,8 +192,8 @@ template <typename T>
 template <typename... Ta>
 inline int neo::ndarray<T>::get(Ta... args) {
   constexpr unsigned int n = sizeof...(Ta);
-  assert_check(n >= 1, "Must pass at least one argument");
-  assert_check(n <= _dim, "Indexing deeper than number of dimensions");
+  assert_check(n >= 1,"Must pass at least one argument");
+  assert_check(n <= _dim, "Indices deeper than number of dimensions");
   int arr[n]{args...};
 
   if (_dim == 1) {
