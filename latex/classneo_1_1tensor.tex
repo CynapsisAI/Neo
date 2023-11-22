@@ -1,0 +1,273 @@
+\doxysection{neo\+::tensor\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1tensor}{}\label{classneo_1_1tensor}\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classneo_1_1tensor_a226b7bd0faa8405967f4a54279269e3e}\label{classneo_1_1tensor_a226b7bd0faa8405967f4a54279269e3e} 
+{\bfseries tensor} (std\+::initializer\+\_\+list$<$ \mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} $>$ shape)
+\item 
+\Hypertarget{classneo_1_1tensor_a5ac64d98c321ebeb87687d0c576dc8ad}\label{classneo_1_1tensor_a5ac64d98c321ebeb87687d0c576dc8ad} 
+{\bfseries tensor} (\mbox{\hyperlink{classneo_1_1array}{T}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classneo_1_1array}{array}}, \mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} \texorpdfstring{$\ast$}{*}shape, \mbox{\hyperlink{classneo_1_1array}{int}} rank, \mbox{\hyperlink{classneo_1_1array}{bool}} \mbox{\hyperlink{classneo_1_1array}{copy\+\_\+array}})
+\item 
+\Hypertarget{classneo_1_1tensor_a5cd366c389b888a49cc609adee62c410}\label{classneo_1_1tensor_a5cd366c389b888a49cc609adee62c410} 
+{\bfseries tensor} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \&\mbox{\hyperlink{classneo_1_1tensor}{tensor}})
+\item 
+\Hypertarget{classneo_1_1tensor_a455ef2da06680cfcff80890a25a64fec}\label{classneo_1_1tensor_a455ef2da06680cfcff80890a25a64fec} 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& {\bfseries operator=} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \&\mbox{\hyperlink{classneo_1_1tensor}{tensor}})
+\item 
+\Hypertarget{classneo_1_1tensor_a8acb72d7e934878dcc92e9f6d6b43d21}\label{classneo_1_1tensor_a8acb72d7e934878dcc92e9f6d6b43d21} 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& {\bfseries operator=} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1array}{val}})
+\item 
+{\footnotesize template$<$typename... Ta$>$ }\\\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor_ad4fc96970e3be68dcbbe73aa392d5f00}{get}} (Ta... \mbox{\hyperlink{classneo_1_1array}{args}}) \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\Hypertarget{classneo_1_1tensor_ab4630cd0de9b20737a21b434e27e9545}\label{classneo_1_1tensor_ab4630cd0de9b20737a21b434e27e9545} 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}}, \mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} $>$ {\bfseries loc\+\_\+interval} (\mbox{\hyperlink{classneo_1_1array}{int}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classneo_1_1array}{args}}, \mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} \mbox{\hyperlink{classneo_1_1array}{cap}}) \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor_a814252217788836ac1cc9d8d292cced2}{flatten}} (\mbox{\hyperlink{classneo_1_1array}{bool}} \mbox{\hyperlink{classneo_1_1array}{in\+\_\+place}}=\mbox{\hyperlink{classneo_1_1array}{false}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor_a3dec06e28c24a8371c9e20f0ced0b748}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} \mbox{\hyperlink{classneo_1_1array}{index}}) \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor_a6056c1b839a9cef903b6f3b845ca45e6}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} \mbox{\hyperlink{classneo_1_1array}{index}})
+\item 
+\Hypertarget{classneo_1_1tensor_a661f91690217e1e12643ed40c401c6e1}\label{classneo_1_1tensor_a661f91690217e1e12643ed40c401c6e1} 
+\mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} {\bfseries rank} () \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\Hypertarget{classneo_1_1tensor_a83dd1ed04ccc6c8a628bef6436f87508}\label{classneo_1_1tensor_a83dd1ed04ccc6c8a628bef6436f87508} 
+\mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} {\bfseries size} () \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\Hypertarget{classneo_1_1tensor_ab7568f06d305cae1c7ca3cf5fe8079f2}\label{classneo_1_1tensor_ab7568f06d305cae1c7ca3cf5fe8079f2} 
+\mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}} \texorpdfstring{$\ast$}{*} {\bfseries shape} () \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\Hypertarget{classneo_1_1tensor_a732b2d65c43c053273b0c02be2c147bf}\label{classneo_1_1tensor_a732b2d65c43c053273b0c02be2c147bf} 
+\mbox{\hyperlink{classneo_1_1array}{T}} \texorpdfstring{$\ast$}{*} {\bfseries array} () \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}} () \mbox{\hyperlink{classneo_1_1array}{const}}
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor_a5d68ac0c2990e5d3dcbd768a9d729767}{operator+}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor_a8ee4314b8122b9ddc77a830ccce74f04}{operator+}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \&\mbox{\hyperlink{classneo_1_1array}{tens}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor_a2c2aa1ad12b4a2d2ccc574c125c77aef}{operator\texorpdfstring{$\ast$}{*}}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor_a686afff17965ef8314ea70a5d69dc5e7}{operator/}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor_a641f37f007572e747f781ba0ce15ccd7}{operator+=}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor_a9eb261e7c2ab495682e26abd50252983}{operator+=}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \&\mbox{\hyperlink{classneo_1_1array}{tens}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor_a221a3122c5e16892d4ae09682b342fc7}{operator\texorpdfstring{$\ast$}{*}=}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}})
+\item 
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor_acab2861fb8040d2b9dd90c17e8830e81}{operator/=}} (\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}})
+\item 
+\Hypertarget{classneo_1_1tensor_a10cdef9274fe13457e63d693869cb94f}\label{classneo_1_1tensor_a10cdef9274fe13457e63d693869cb94f} 
+{\footnotesize template$<$typename... Ta$>$ }\\\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& {\bfseries get} (Ta... \mbox{\hyperlink{classneo_1_1array}{args}}) \mbox{\hyperlink{classneo_1_1array}{const}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1tensor_a814252217788836ac1cc9d8d292cced2}\label{classneo_1_1tensor_a814252217788836ac1cc9d8d292cced2} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!flatten@{flatten}}
+\index{flatten@{flatten}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{flatten()}{flatten()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::flatten (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{bool}}}]{in\+\_\+place = {\ttfamily \mbox{\hyperlink{classneo_1_1array}{false}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Flattens the tensor into a rank 1 tensor 
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+place} & if the operation should act on the original tensor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$\& of rank 1 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_ad4fc96970e3be68dcbbe73aa392d5f00}\label{classneo_1_1tensor_ad4fc96970e3be68dcbbe73aa392d5f00} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!get@{get}}
+\index{get@{get}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+template$<$typename... Ta$>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::get (\begin{DoxyParamCaption}\item[{Ta...}]{args }\end{DoxyParamCaption}) const}
+
+Get Function. Similar functionality to \mbox{[}\mbox{]} Variadic Arguments 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Ta} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$\& 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a2c2aa1ad12b4a2d2ccc574c125c77aef}\label{classneo_1_1tensor_a2c2aa1ad12b4a2d2ccc574c125c77aef} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}}}]{scalar }\end{DoxyParamCaption})}
+
+Scalar Multiplication 
+\begin{DoxyParams}{Parameters}
+{\em scalar} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$ 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a221a3122c5e16892d4ae09682b342fc7}\label{classneo_1_1tensor_a221a3122c5e16892d4ae09682b342fc7} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}}}]{scalar }\end{DoxyParamCaption})}
+
+Assignment Scalar Multiplication 
+\begin{DoxyParams}{Parameters}
+{\em scalar} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$\& 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a5d68ac0c2990e5d3dcbd768a9d729767}\label{classneo_1_1tensor_a5d68ac0c2990e5d3dcbd768a9d729767} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}}}]{scalar }\end{DoxyParamCaption})}
+
+Scalar Addition 
+\begin{DoxyParams}{Parameters}
+{\em scalar} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$ 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a8ee4314b8122b9ddc77a830ccce74f04}\label{classneo_1_1tensor_a8ee4314b8122b9ddc77a830ccce74f04} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \&}]{tens }\end{DoxyParamCaption})}
+
+Tensor Addition Add tensors element-\/wise 
+\begin{DoxyParams}{Parameters}
+{\em tens} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$ 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a641f37f007572e747f781ba0ce15ccd7}\label{classneo_1_1tensor_a641f37f007572e747f781ba0ce15ccd7} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}}}]{scalar }\end{DoxyParamCaption})}
+
+Assignment Scalar Addition 
+\begin{DoxyParams}{Parameters}
+{\em scalar} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$\& 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a9eb261e7c2ab495682e26abd50252983}\label{classneo_1_1tensor_a9eb261e7c2ab495682e26abd50252983} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1tensor}{tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \&}]{tens }\end{DoxyParamCaption})}
+
+Assignment Tensor Addition Add tensors element-\/wise 
+\begin{DoxyParams}{Parameters}
+{\em tens} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$\& 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a686afff17965ef8314ea70a5d69dc5e7}\label{classneo_1_1tensor_a686afff17965ef8314ea70a5d69dc5e7} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator/@{operator/}}
+\index{operator/@{operator/}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}}}]{scalar }\end{DoxyParamCaption})}
+
+Scalar Division 
+\begin{DoxyParams}{Parameters}
+{\em scalar} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$ 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_acab2861fb8040d2b9dd90c17e8830e81}\label{classneo_1_1tensor_acab2861fb8040d2b9dd90c17e8830e81} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{const}} \mbox{\hyperlink{classneo_1_1array}{T}}}]{scalar }\end{DoxyParamCaption})}
+
+Assignment Scalar Division 
+\begin{DoxyParams}{Parameters}
+{\em scalar} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$\& 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a6056c1b839a9cef903b6f3b845ca45e6}\label{classneo_1_1tensor_a6056c1b839a9cef903b6f3b845ca45e6} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \& \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}}}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Indexing the array. Acts recursively to access rank-\/n tensors 
+\begin{DoxyParams}{Parameters}
+{\em index} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$\& 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_a3dec06e28c24a8371c9e20f0ced0b748}\label{classneo_1_1tensor_a3dec06e28c24a8371c9e20f0ced0b748} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1array}{unsigned}} \mbox{\hyperlink{classneo_1_1array}{int}}}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Indexing the array. Acts recursively to access rank-\/n tensors Const Variant 
+\begin{DoxyParams}{Parameters}
+{\em index} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tensor$<$\+T$>$ 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}\label{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3} 
+\index{neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}!scalar@{scalar}}
+\index{scalar@{scalar}!neo::tensor$<$ T $>$@{neo::tensor$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{scalar()}{scalar()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classneo_1_1array}{typename}} \mbox{\hyperlink{classneo_1_1array}{T}} $>$ \\
+\mbox{\hyperlink{classneo_1_1array}{T}} \mbox{\hyperlink{classneo_1_1tensor}{neo\+::tensor}}$<$ \mbox{\hyperlink{classneo_1_1array}{T}} $>$\+::scalar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get scalar of tensor given it is a rank 0 tensor \begin{DoxyReturn}{Returns}
+T 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em logic\+\_\+error} & If called on a tensor that is not rank 0 \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/tensor.\+hpp\end{DoxyCompactItemize}
