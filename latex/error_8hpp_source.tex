@@ -1,0 +1,59 @@
+\doxysection{error.\+hpp}
+\hypertarget{error_8hpp_source}{}\label{error_8hpp_source}\index{include/error.hpp@{include/error.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Ali\ A\ on\ 2023-\/11-\/17.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ NEO\_ERROR\_HPP}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ NEO\_ERROR\_HPP}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <exception>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ Exception\ types:}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ logic\_error}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ invalid\_argument}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ domain\_error}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ length\_error}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ out\_of\_range}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ future\_error\ (since\ C++11)}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ runtime\_error}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ range\_error}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ overflow\_error}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ underflow\_error}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ regex\_error\ (since\ C++11)}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ system\_error\ (since\ C++11)}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ \ ios\_base::failure\ (since\ C++11)}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ \ filesystem::filesystem\_error\ (since\ C++17)}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ \ tx\_exception\ (TM\ TS)}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ nonexistent\_local\_time\ (since\ C++20)}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ ambiguous\_local\_time\ (since\ C++20)}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ format\_error\ (since\ C++20)}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ \ bad\_typeid}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ \ bad\_cast}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ bad\_any\_cast\ (since\ C++17)}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ bad\_optional\_access\ (since\ C++17)}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ bad\_expected\_access\ (since\ C++23)}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ bad\_weak\_ptr\ (since\ C++11)}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ bad\_function\_call\ (since\ C++11)}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ bad\_alloc}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\ \ \ \ bad\_array\_new\_length\ (since\ C++11)}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ bad\_exception}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ ios\_base::failure\ (until\ C++11)}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ bad\_variant\_access\ (since\ C++17)}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ assert\_check(\textcolor{keywordtype}{bool}\ expr,\ std::string\ message)\{}
+\DoxyCodeLine{00047\ \ \ \textcolor{keywordflow}{if}(expr)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00048\ \ \ std::cout<<\textcolor{stringliteral}{"{}Error:\ "{}}<<message<<std::endl;}
+\DoxyCodeLine{00049\ \ \ exit(0);}
+\DoxyCodeLine{00050\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//NEO\_ERROR\_HPP}}
+
+\end{DoxyCode}

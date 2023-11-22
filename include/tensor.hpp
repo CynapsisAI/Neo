@@ -16,17 +16,16 @@ namespace neo {
   template <typename T>
   class tensor {
   private:
-
-    unsigned int _size{1};
-    unsigned int *_shape{};
-    unsigned int _dim{};
-    T* _array;
+    unsigned int _size{1}; //!< Size of Array
+    unsigned int *_shape{}; //!< Shape of Tensor
+    unsigned int _rank{}; //!< Rank of tensor
+    T* _array; ///< Array of all values. Not accessed directly, as the array is a single dimension wheras the tensor may be of a different rank/dimension
 
 
   public:
     // Default
     tensor(std::initializer_list<unsigned int> shape);
-    tensor(T* array, unsigned int *shape, int dim);
+    tensor(T* array, unsigned int *shape, int rank, bool copy_array);
 
 		// Copy constructor
 		tensor(const tensor<T>& tensor);
@@ -40,24 +39,115 @@ namespace neo {
 	  tensor<T>& operator= (const T val);
 
     // Functions
+    /**
+     * Get Function. Similar functionality to []
+     * Variadic Arguments
+     * @tparam Ta
+     * @param args
+     * @return tensor<T>&
+     */
     template<typename... Ta>
     tensor<T>& get(Ta... args) const;
 
     std::pair<unsigned int, unsigned int> loc_interval(int* args, unsigned int cap) const;
 
+    /**
+     * Flattens the tensor into a rank 1 tensor
+     * @param in_place if the operation should act on the original tensor
+     * @return tensor<T>& of rank 1
+     */
     tensor<T>& flatten(bool in_place = false);
 
     // Square bracket operator
+    /**
+     * Indexing the array. Acts recursively to access rank-n tensors
+     * Const Variant
+     * @param index
+     * @return tensor<T>
+     */
     neo::tensor<T> operator[](unsigned int index) const;
+
+    /**
+     * Indexing the array. Acts recursively to access rank-n tensors
+     * @param index
+     * @return tensor<T>&
+     */
     neo::tensor<T>& operator[](unsigned int index);
 
 
 		// Getters
-		unsigned int dim() const {return _dim;}
+		unsigned int rank() const {return _rank;}
 		unsigned int size() const {return _size;}
 		unsigned int* shape() const {return _shape;}
 		T* array() const {return _array;}
-    T scalar() const { assert_check(_dim == 0,"Can only call scalar on tensor dim=0"); return _array[0];};
+
+    /**
+     * Get scalar of tensor given it is a rank 0 tensor
+     * @return T
+     * @throws logic_error If called on a tensor that is not rank 0
+     */
+    T scalar() const { assert_check(_rank == 0,"Can only call scalar on tensor rank=0"); return _array[0];};
+
+
+    // Operator overload
+    /**
+     * Scalar Addition
+     * @param scalar
+     * @return tensor<T>
+     */
+    tensor<T> operator+(const T scalar);
+    /**
+     * Tensor Addition
+     * Add tensors element-wise
+     * @param tens
+     * @return tensor<T>
+     */
+    tensor<T> operator+(const tensor<T>& tens);
+
+    /**
+     * Scalar Multiplication
+     * @param scalar
+     * @return tensor<T>
+     */
+    tensor<T> operator*(const T scalar);
+
+    /**
+     * Scalar Division
+     * @param scalar
+     * @return tensor<T>
+     */
+    tensor<T> operator/(const T scalar);
+
+
+    /**
+    * Assignment Scalar Addition
+    * @param scalar
+    * @return tensor<T>&
+    */
+    tensor<T>& operator+=(const T scalar);
+    /**
+     * Assignment Tensor Addition
+     * Add tensors element-wise
+     * @param tens
+     * @return tensor<T>&
+     */
+    tensor<T>& operator+=(const tensor<T>& tens);
+
+    /**
+     * Assignment Scalar Multiplication
+     * @param scalar
+     * @return tensor<T>&
+     */
+    tensor<T>& operator*=(const T scalar);
+
+    /**
+     * Assignment Scalar Division
+     * @param scalar
+     * @return tensor<T>&
+     */
+    tensor<T>& operator/=(const T scalar);
+
+
 
   };
 }
@@ -69,8 +159,8 @@ std::ostream &operator<<(std::ostream &s, const neo::tensor<T> &tensor);
 // Default Constructor
 template <typename T>
 neo::tensor<T>::tensor(std::initializer_list<unsigned int> shape) {
-  _dim = shape.size();
-  _shape = new unsigned int[_dim];
+  _rank = shape.size();
+  _shape = new unsigned int[_rank];
   std::copy(shape.begin(), shape.end(), _shape);
   _size = std::accumulate( shape.begin(), shape.end(), 1, std::multiplies<unsigned int>() );
 
@@ -81,23 +171,37 @@ neo::tensor<T>::tensor(std::initializer_list<unsigned int> shape) {
 
 }
 
-// Constructor
+// Constructor by copy
 template <typename T>
-neo::tensor<T>::tensor(T* array, unsigned int* shape, int dim) {
-  _dim = dim;
-  _shape = shape;
-  for (std::size_t i{}; i < dim; i++) {
+neo::tensor<T>::tensor(T* array, unsigned int* shape, int rank, bool copy_array) {
+  _rank = rank;
+
+  // Create copy of shape and assign size
+  _shape = new unsigned int[_rank];
+  for (std::size_t i{}; i < rank; i++){
+    _shape[i] = shape[i];
     _size *= _shape[i];
   }
 
-  // Initialize to 0s
-  _array = array;
+  if (copy_array){
+    // Create copy of array
+    _array = new T[_size];
+    for (std::size_t i{}; i < _size; i++){
+      _array[i] = array[i];
+    }
+
+  } else {
+    _array = array;
+  }
+
+
+
 }
 
 // Copy constructor
 template <typename T>
 neo::tensor<T>::tensor(const tensor<T>& tensor) {
-	_dim = tensor.dim();
+	_rank = tensor.rank();
 	_shape = tensor.shape();
   _size = tensor.size();
   _array = new T[_size];
@@ -113,6 +217,9 @@ template <typename T>
 neo::tensor<T>::~tensor() {
   delete[] _array;
   _array = nullptr;
+
+  delete[] _shape;
+  _shape = nullptr;
 
 }
 
@@ -140,11 +247,11 @@ inline neo::tensor<T>& neo::tensor<T>::operator=(const tensor <T> &tensor) {
 	}
 
 	// Check if tensor is same size
-	assert_check(_dim == tensor.dim(), "Tensors must be the same size & dimension");
+	assert_check(_rank == tensor.rank(), "Tensors must be the same size & rank");
 	unsigned int* tensor_shape = tensor.shape();
 
-	for (std::size_t i{}; i < _dim; i++){
-		assert_check(_shape[i] == tensor_shape[i], "Tensors must be the same size & dimension");
+	for (std::size_t i{}; i < _rank; i++){
+		assert_check(_shape[i] == tensor_shape[i], "Tensors must be the same size & rank");
 	}
 
 	T* new_array = tensor.array();
@@ -171,7 +278,7 @@ template <typename... Ta>
 inline neo::tensor<T>& neo::tensor<T>::get(Ta... args) const{
   constexpr unsigned int n = sizeof...(Ta);
   assert_check(n >= 1,"Must pass at least one argument");
-  assert_check(n <= _dim, "Indexing deeper than number of dimensions");
+  assert_check(n <= _rank, "Indexing deeper than number of dimensions");
   int arr[n]{args...};
 
   // Check that arguments are within bounds
@@ -180,7 +287,7 @@ inline neo::tensor<T>& neo::tensor<T>::get(Ta... args) const{
   }
 
   std::pair<unsigned int, unsigned int> range = loc_interval(arr, n);
-  neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+n, _dim-n);
+  neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+n, _rank-n, false);
   return *new_tensor;
 }
 
@@ -190,7 +297,7 @@ inline neo::tensor<T>& neo::tensor<T>::operator[](unsigned int i){
 
   int arr[1]{(int)i};
   std::pair<unsigned int, unsigned int> range = loc_interval(arr, 1);
-  neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+1, _dim-1);
+  neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+1, _rank-1, false);
 
   return *new_tensor;
 }
@@ -201,7 +308,7 @@ inline neo::tensor<T> neo::tensor<T>::operator[](unsigned int i) const{
 
   int arr[1]{(int)i};
   std::pair<unsigned int, unsigned int> range = loc_interval(arr, 1);
-  neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+1, _dim-1);
+  neo::tensor<T>* new_tensor = new neo::tensor<T>(_array+range.first, _shape+1, _rank-1, false);
 
   return *new_tensor;
 }
@@ -222,7 +329,7 @@ inline neo::tensor<T>& neo::tensor<T>::flatten(bool in_place){
 		new_array[i] = _array[i];
 
 
-	neo::tensor<T>* new_tensor = new neo::tensor<T>(new_array, new_shape, 1);
+	neo::tensor<T>* new_tensor = new neo::tensor<T>(new_array, new_shape, 1, false);
 	return *new_tensor;
 }
 
@@ -233,9 +340,9 @@ std::ostream& recurse_ostream(std::ostream &s, const neo::tensor<T> &tensor){
   unsigned int* shape = tensor.shape();
   T* tensor_array = tensor.array();
 
-  unsigned int dim = tensor.dim();
+  unsigned int rank = tensor.rank();
 
-  if (dim <= 1){
+  if (rank <= 1){
     for (std::size_t i{}; i < tensor.size(); i++){
       s<<tensor_array[i];
       if (i != (tensor.size()-1)){
@@ -266,6 +373,129 @@ std::ostream &operator<<(std::ostream &s, const neo::tensor<T> &tensor) {
   recurse_ostream(s, tensor);
   s<<"]";
   return s;
+}
+
+// Operator Overload
+template <typename T>
+neo::tensor<T> neo::tensor<T>::operator+(const T scalar){
+  T* new_arr = new T[size()];
+  for (std::size_t i{}; i < size(); i++) {
+    new_arr[i] = _array[i] + scalar;
+  }
+
+  tensor<T>* new_tens = new tensor<T>(new_arr, _shape, _rank, false);
+
+  return *new_tens;
+}
+
+template <typename T>
+neo::tensor<T> neo::tensor<T>::operator+(const tensor<T>& tens){
+
+  if (this == &tens){
+    T* array = new T[_size];
+
+    for (std::size_t i{}; i < _size; i++){ array[i] = _array[i]*2; }
+
+    neo::tensor<T>* new_tens = new neo::tensor<T>(array, _shape, _rank, false);
+
+    return *new_tens;
+  }
+
+
+  assert_check(_rank == tens.rank(), "Tensors must be the same rank");
+  unsigned int* tens_shape = tens.shape();
+  for (std::size_t i{}; i < _rank; i++){
+    assert_check(_shape[i] == tens_shape[i], "Tensors must be the same shape");
+  }
+
+  T* new_arr = new T[size()];
+  T* tens_arr = tens.array();
+
+  for (std::size_t i{}; i < size(); i++){
+    new_arr[i] = _array[i] + tens_arr[i];
+  }
+
+  neo::tensor<T>* new_tens = new neo::tensor<T>(new_arr, _shape, _rank, false);
+
+  return *new_tens;
+}
+
+template <typename T>
+neo::tensor<T> neo::tensor<T>::operator*(const T scalar){
+  T* new_arr = new T[size()];
+  for (std::size_t i{}; i < size(); i++) {
+    new_arr[i] = _array[i] * scalar;
+  }
+
+  tensor<T>* new_tens = new tensor<T>(new_arr, _shape, _rank, false);
+
+  return *new_tens;
+}
+
+template <typename T>
+neo::tensor<T> neo::tensor<T>::operator/(const T scalar){
+  assert_check(scalar != 0, "Cannot divide by 0");
+  T* new_arr = new T[size()];
+  for (std::size_t i{}; i < size(); i++) {
+    new_arr[i] = _array[i] / scalar;
+  }
+
+  tensor<T>* new_tens = new tensor<T>(new_arr, _shape, _rank, false);
+
+  return *new_tens;
+}
+
+template <typename T>
+neo::tensor<T>& neo::tensor<T>::operator+=(const T scalar){
+  for (std::size_t i{}; i < size(); i++) {
+    _array[i] += scalar;
+  }
+
+  return *this;
+}
+
+
+template <typename T>
+neo::tensor<T>& neo::tensor<T>::operator+=(const tensor<T>& tens){
+  if (this == &tens){
+    for (std::size_t i{}; i < _size; i++){ _array[i] *= 2; }
+    return *this;
+  }
+
+  assert_check(_rank == tens.rank(), "Tensors must be the same rank");
+  unsigned int* tens_shape = tens.shape();
+  for (std::size_t i{}; i < _rank; i++){
+    assert_check(_shape[i] == tens_shape[i], "Tensors must be the same shape");
+  }
+
+  T* tens_arr = tens.array();
+
+  for (std::size_t i{}; i < size(); i++){
+    _array[i] += tens_arr[i];
+  }
+
+  return *this;
+}
+
+template <typename T>
+neo::tensor<T>& neo::tensor<T>::operator*=(const T scalar){
+  for (std::size_t i{}; i < size(); i++) {
+    _array[i] *= scalar;
+  }
+
+  return *this;
+}
+
+template <typename T>
+neo::tensor<T>& neo::tensor<T>::operator/=(const T scalar){
+  assert_check(scalar != 0, "Cannot divide by 0");
+
+
+  for (std::size_t i{}; i < size(); i++) {
+    _array[i] /= scalar;
+  }
+
+  return *this;
 }
 
 #endif //NEO_TENSOR_HPP

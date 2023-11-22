@@ -1,0 +1,104 @@
+\doxysection{structs.\+hpp}
+\hypertarget{structs_8hpp_source}{}\label{structs_8hpp_source}\index{include/structs.hpp@{include/structs.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ alial\ on\ 2023-\/11-\/10.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ NEO\_STRUCTS\_HPP}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ NEO\_STRUCTS\_HPP}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <typeinfo>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }neo}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1shape__obj}{shape\_obj}}}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \_dim\{\};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ *\_shape\{\};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ *getShape()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_shape;\ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ getDim()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_dim;\ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1shape__obj}{shape\_obj}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ dim,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ *shape)}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \_dim\ =\ dim;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \_shape\ =\ shape;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ Output\ Operator\ <<}}
+\DoxyCodeLine{00033\ std::ostream\ \&operator<<(std::ostream\ \&s,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1shape__obj}{neo::shape\_obj}}\ \&shape\_obj)}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ s\ <<\ \textcolor{stringliteral}{"{}("{}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ (shape\_obj.getDim());\ ++i)}
+\DoxyCodeLine{00038\ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ s\ <<\ (shape\_obj.getShape()[i]);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Print\ a\ comma\ and\ space\ if\ it's\ not\ the\ last\ element}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ shape\_obj.getDim()\ -\/\ 1)}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ s\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ s\ <<\ \textcolor{stringliteral}{"{})"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00051\ \}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ struct\ shape\ \{}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ \ private:}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ \ \ unsigned\ int*\ \_shape\{\};}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ \ \ unsigned\ int\ \_dim\{\};}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ \ \ \ \ \ unsigned\ int\ \_size\{1\};}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \ public:}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ \ \ \ \ \ shape(std::initializer\_list<unsigned\ int>\ shape)\{}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \_dim\ =\ shape.size();}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ for\ (auto\ i\ :\ shape)}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_size\ *=\ i;}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \_shape\ =\ new\ unsigned\ int[\_size];}}
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ std::copy(shape.begin(),\ shape.end(),\ \_shape);}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ \ \ \ \ \ shape(unsigned\ int*\ shape,\ unsigned\ int\ dim)\{}}
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \_shape\ =\ shape;}}
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \_dim\ =\ dim;}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ for\ (unsigned\ int\ i\{\};\ i\ <\ \_dim;\ i++)}}
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_size\ *=\ \_shape[i];}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ \ \ \ \ \ \string~shape()\{}}
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ std::cout<<"{}Destroying\ Shape.\ Dim:\ "{}<<\_dim<<std::endl;}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ delete[]\ \_shape;}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \_shape\ =\ nullptr;}}
+\DoxyCodeLine{00082\ \textcolor{comment}{//\ \ \ \ \ \ \}}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ \ \ \ \ \ unsigned\ int*\ list()\ const\{\ return\ \_shape;\ \}}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ \ \ \ \ \ unsigned\ int\ dim()\ const\{\ return\ \_dim;\ \}}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ \ \ \ \ \ unsigned\ int\ size()\ const\{\ return\ \_size;\ \}}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ \ \ unsigned\ int\ upper\_dim()\ const\ \{\ return\ \_shape[0];\ \}}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ \ \};}}
+\DoxyCodeLine{00093\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ //\ Output\ Operator\ <<}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ std::ostream\ \&operator<<(std::ostream\ \&s,\ const\ neo::shape\ \&shape);}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ NEO\_STRUCTS\_HPP}}
+
+\end{DoxyCode}

@@ -3,10 +3,14 @@
 
 int main() {
 	neo::tensor<int> tens({2,2,3});
+  neo::tensor<int> tens2({2,2,3});
+  tens = 3;
+  tens2 = 5;
 
-  neo::tensor<int> scalar({1});
-  std::cout<<tens.get(1,1,3)<<std::endl;
 
+  tens += tens;
+
+  std::cout<<tens<<std::endl;
 
 	return 0;
 }

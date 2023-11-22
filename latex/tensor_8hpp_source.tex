@@ -1,0 +1,437 @@
+\doxysection{tensor.\+hpp}
+\hypertarget{tensor_8hpp_source}{}\label{tensor_8hpp_source}\index{include/tensor.hpp@{include/tensor.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ Ali\ A\ on\ 2023-\/11-\/13.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ NEO\_TENSOR\_HPP}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ NEO\_TENSOR\_HPP}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <numeric>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}structs.hpp"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}error.hpp"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }neo\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1tensor}{tensor}}\ \{}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \_size\{1\};\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ *\_shape\{\};\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \_rank\{\};\ }
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \_array;\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ Default}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classneo_1_1tensor}{tensor}}(std::initializer\_list<unsigned\ int>\ shape);}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1tensor}{tensor}}(\mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{array}},\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ *shape,\ \textcolor{keywordtype}{int}\ rank,\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1array}{copy\_array}});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ constructor}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1tensor}{tensor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor}{tensor}});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Destructor}}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classneo_1_1tensor}{\string~tensor}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Assignment\ operator}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1array}{operator=\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor}{tensor}});}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1array}{operator=\ }}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1array}{val}});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Functions}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ \mbox{\hyperlink{classneo_1_1array}{Ta}}>}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_ad4fc96970e3be68dcbbe73aa392d5f00}{get}}(\mbox{\hyperlink{classneo_1_1array}{Ta}}...\ \mbox{\hyperlink{classneo_1_1array}{args}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ std::pair<unsigned\ int,\ unsigned\ int>\ loc\_interval(\textcolor{keywordtype}{int}*\ \mbox{\hyperlink{classneo_1_1array}{args}},\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{cap}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a814252217788836ac1cc9d8d292cced2}{flatten}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1array}{in\_place}}\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Square\ bracket\ operator}}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a3dec06e28c24a8371c9e20f0ced0b748}{operator[]}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{index}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a3dec06e28c24a8371c9e20f0ced0b748}{operator[]}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{index}});}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ rank()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_rank;\}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_size;\}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ shape()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_shape;\}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ T*\ array()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ \_array;\}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}}()\textcolor{keyword}{\ const\ }\{\ assert\_check(\_rank\ ==\ 0,\textcolor{stringliteral}{"{}Can\ only\ call\ scalar\ on\ tensor\ rank=0"{}});\ \textcolor{keywordflow}{return}\ \_array[0];\};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//\ Operator\ overload}}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a5d68ac0c2990e5d3dcbd768a9d729767}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}});}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a5d68ac0c2990e5d3dcbd768a9d729767}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1array}{tens}});}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00112\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a2c2aa1ad12b4a2d2ccc574c125c77aef}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}});}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a686afff17965ef8314ea70a5d69dc5e7}{operator/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}});}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a641f37f007572e747f781ba0ce15ccd7}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}});}
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a641f37f007572e747f781ba0ce15ccd7}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1array}{tens}});}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a221a3122c5e16892d4ae09682b342fc7}{operator*=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}});}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_acab2861fb8040d2b9dd90c17e8830e81}{operator/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ \mbox{\hyperlink{classneo_1_1tensor_aff8af1e77511e48c366548221cf0a6f3}{scalar}});}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \};}
+\DoxyCodeLine{00153\ \}}
+\DoxyCodeLine{00154\ \textcolor{comment}{//\ Output\ Operator\ <<}}
+\DoxyCodeLine{00155\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00156\ std::ostream\ \&operator<<(std::ostream\ \&s,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \&tensor);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{comment}{//\ Default\ Constructor}}
+\DoxyCodeLine{00160\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00161\ \mbox{\hyperlink{classneo_1_1tensor}{neo::tensor<T>::tensor}}(std::initializer\_list<unsigned\ int>\ shape)\ \{}
+\DoxyCodeLine{00162\ \ \ \_rank\ =\ shape.size();}
+\DoxyCodeLine{00163\ \ \ \_shape\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}[\_rank];}
+\DoxyCodeLine{00164\ \ \ std::copy(shape.begin(),\ shape.end(),\ \_shape);}
+\DoxyCodeLine{00165\ \ \ \_size\ =\ std::accumulate(\ shape.begin(),\ shape.end(),\ 1,\ std::multiplies<unsigned\ int>()\ );}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ assert\_check(\_size\ >\ 0,\ \textcolor{stringliteral}{"{}During\ Creation:\ Sub-\/dimension\ cannot\ be\ 0"{}});}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \textcolor{comment}{//\ Initialize\ to\ 0s}}
+\DoxyCodeLine{00170\ \ \ \_array\ =\ \textcolor{keyword}{new}\ T[\_size]\{0\};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{comment}{//\ Constructor\ by\ copy}}
+\DoxyCodeLine{00175\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00176\ \mbox{\hyperlink{classneo_1_1tensor}{neo::tensor<T>::tensor}}(T*\ array,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ shape,\ \textcolor{keywordtype}{int}\ rank,\ \textcolor{keywordtype}{bool}\ copy\_array)\ \{}
+\DoxyCodeLine{00177\ \ \ \_rank\ =\ rank;}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \textcolor{comment}{//\ Create\ copy\ of\ shape\ and\ assign\ size}}
+\DoxyCodeLine{00180\ \ \ \_shape\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}[\_rank];}
+\DoxyCodeLine{00181\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ rank;\ i++)\{}
+\DoxyCodeLine{00182\ \ \ \ \ \_shape[i]\ =\ shape[i];}
+\DoxyCodeLine{00183\ \ \ \ \ \_size\ *=\ \_shape[i];}
+\DoxyCodeLine{00184\ \ \ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \textcolor{keywordflow}{if}\ (copy\_array)\{}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ Create\ copy\ of\ array}}
+\DoxyCodeLine{00188\ \ \ \ \ \_array\ =\ \textcolor{keyword}{new}\ T[\_size];}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ \_size;\ i++)\{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \_array[i]\ =\ array[i];}
+\DoxyCodeLine{00191\ \ \ \ \ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \_array\ =\ array;}
+\DoxyCodeLine{00195\ \ \ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{comment}{//\ Copy\ constructor}}
+\DoxyCodeLine{00202\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00203\ \mbox{\hyperlink{classneo_1_1tensor}{neo::tensor<T>::tensor}}(\textcolor{keyword}{const}\ tensor<T>\&\ tensor)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \_rank\ =\ tensor.rank();}
+\DoxyCodeLine{00205\ \ \ \ \ \_shape\ =\ tensor.shape();}
+\DoxyCodeLine{00206\ \ \ \_size\ =\ tensor.size();}
+\DoxyCodeLine{00207\ \ \ \_array\ =\ \textcolor{keyword}{new}\ T[\_size];}
+\DoxyCodeLine{00208\ \ \ T*\ array\ =\ tensor.array();}
+\DoxyCodeLine{00209\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ \_size;\ i++)\{}
+\DoxyCodeLine{00210\ \ \ \ \ \_array[i]\ =\ array[i];}
+\DoxyCodeLine{00211\ \ \ \}}
+\DoxyCodeLine{00212\ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{comment}{//\ Destructor}}
+\DoxyCodeLine{00216\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00217\ \mbox{\hyperlink{classneo_1_1tensor}{neo::tensor<T>::\string~tensor}}()\ \{}
+\DoxyCodeLine{00218\ \ \ \textcolor{keyword}{delete}[]\ \_array;}
+\DoxyCodeLine{00219\ \ \ \_array\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \textcolor{keyword}{delete}[]\ \_shape;}
+\DoxyCodeLine{00222\ \ \ \_shape\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \textcolor{comment}{//\ Return\ a\ tuple\ of\ <starting\ index,\ ending\ index>}}
+\DoxyCodeLine{00227\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00228\ \textcolor{keyword}{inline}\ std::pair<unsigned\ int,\ unsigned\ int>\ \mbox{\hyperlink{classneo_1_1tensor}{neo::tensor<T>::loc\_interval}}(\textcolor{keywordtype}{int}*\ args,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ cap)\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00229\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size\_copy\{\_size\};}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ running\_index\{0\};}
+\DoxyCodeLine{00232\ \ \ \textcolor{keywordflow}{for}(std::size\_t\ i\{\};\ i\ <\ cap;\ i++)\{}
+\DoxyCodeLine{00233\ \ \ \ \ size\_copy/=\_shape[i];}
+\DoxyCodeLine{00234\ \ \ \ \ running\_index\ +=\ (args[i]*size\_copy);}
+\DoxyCodeLine{00235\ \ \ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ std::pair<unsigned\ int,\ unsigned\ int>\ range(running\_index,\ running\_index+size\_copy-\/1);}
+\DoxyCodeLine{00238\ \ \ \textcolor{keywordflow}{return}\ range;}
+\DoxyCodeLine{00239\ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{comment}{//\ Copy\ assignment\ operator}}
+\DoxyCodeLine{00242\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00243\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor}{neo::tensor<T>::operator=}}(\textcolor{keyword}{const}\ tensor\ <T>\ \&tensor)\ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{comment}{//\ Self\ assignment\ check}}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ \&tensor)\{}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00247\ \ \ \ \ \}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ tensor\ is\ same\ size}}
+\DoxyCodeLine{00250\ \ \ \ \ assert\_check(\_rank\ ==\ tensor.rank(),\ \textcolor{stringliteral}{"{}Tensors\ must\ be\ the\ same\ size\ \&\ rank"{}});}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ tensor\_shape\ =\ tensor.shape();}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ \_rank;\ i++)\{}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ assert\_check(\_shape[i]\ ==\ tensor\_shape[i],\ \textcolor{stringliteral}{"{}Tensors\ must\ be\ the\ same\ size\ \&\ rank"{}});}
+\DoxyCodeLine{00255\ \ \ \ \ \}}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ T*\ new\_array\ =\ tensor.array();}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ \_size;\ i++)}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \_array[i]\ =\ new\_array[i];}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00263\ \}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00267\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor}{neo::tensor<T>::operator=}}(\textcolor{keyword}{const}\ T\ val)\ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ \_size;\ i++)\{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \_array[i]\ =\ val;}
+\DoxyCodeLine{00270\ \ \ \ \ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00273\ \}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00277\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Ta>}
+\DoxyCodeLine{00278\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_ad4fc96970e3be68dcbbe73aa392d5f00}{neo::tensor<T>::get}}(Ta...\ args)\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00279\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ n\ =\ \textcolor{keyword}{sizeof}...(Ta);}
+\DoxyCodeLine{00280\ \ \ assert\_check(n\ >=\ 1,\textcolor{stringliteral}{"{}Must\ pass\ at\ least\ one\ argument"{}});}
+\DoxyCodeLine{00281\ \ \ assert\_check(n\ <=\ \_rank,\ \textcolor{stringliteral}{"{}Indexing\ deeper\ than\ number\ of\ dimensions"{}});}
+\DoxyCodeLine{00282\ \ \ \textcolor{keywordtype}{int}\ arr[n]\{args...\};}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \textcolor{comment}{//\ Check\ that\ arguments\ are\ within\ bounds}}
+\DoxyCodeLine{00285\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ n;\ i++)\{}
+\DoxyCodeLine{00286\ \ \ \ \ assert\_check(arr[i]<\_shape[i],\ \textcolor{stringliteral}{"{}Index\ out\ of\ bounds\ for\ dimension"{}});}
+\DoxyCodeLine{00287\ \ \ \}}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ \ std::pair<unsigned\ int,\ unsigned\ int>\ range\ =\ loc\_interval(arr,\ n);}
+\DoxyCodeLine{00290\ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}*\ new\_tensor\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}(\_array+range.first,\ \_shape+n,\ \_rank-\/n,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00291\ \ \ \textcolor{keywordflow}{return}\ *new\_tensor;}
+\DoxyCodeLine{00292\ \}}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00295\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a3dec06e28c24a8371c9e20f0ced0b748}{neo::tensor<T>::operator[]}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{i}})\{}
+\DoxyCodeLine{00296\ \ \ assert\_check(\mbox{\hyperlink{classneo_1_1array}{i}}<\_shape[0],\ \textcolor{stringliteral}{"{}Index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{arr}}[1]\{(\mbox{\hyperlink{classneo_1_1array}{int}})\mbox{\hyperlink{classneo_1_1array}{i}}\};}
+\DoxyCodeLine{00299\ \ \ std::pair<unsigned\ int,\ unsigned\ int>\ \mbox{\hyperlink{classneo_1_1array}{range}}\ =\ loc\_interval(\mbox{\hyperlink{classneo_1_1array}{arr}},\ 1);}
+\DoxyCodeLine{00300\ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tensor}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}(\_array+\mbox{\hyperlink{classneo_1_1array}{range}}.first,\ \_shape+1,\ \_rank-\/1,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tensor}};}
+\DoxyCodeLine{00303\ \}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00306\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a3dec06e28c24a8371c9e20f0ced0b748}{neo::tensor<T>::operator[]}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{i}})\textcolor{keyword}{\ const}\{}
+\DoxyCodeLine{00307\ \ \ assert\_check(\mbox{\hyperlink{classneo_1_1array}{i}}<\_shape[0],\textcolor{stringliteral}{"{}Index\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1array}{arr}}[1]\{(\mbox{\hyperlink{classneo_1_1array}{int}})\mbox{\hyperlink{classneo_1_1array}{i}}\};}
+\DoxyCodeLine{00310\ \ \ std::pair<unsigned\ int,\ unsigned\ int>\ \mbox{\hyperlink{classneo_1_1array}{range}}\ =\ loc\_interval(\mbox{\hyperlink{classneo_1_1array}{arr}},\ 1);}
+\DoxyCodeLine{00311\ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tensor}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}(\_array+\mbox{\hyperlink{classneo_1_1array}{range}}.first,\ \_shape+1,\ \_rank-\/1,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tensor}};}
+\DoxyCodeLine{00314\ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00317\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a814252217788836ac1cc9d8d292cced2}{neo::tensor<T>::flatten}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1array}{in\_place}})\{}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1array}{in\_place}})\ \{}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ \_shape;}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \_shape\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}[1]\{\_size\};}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{comment}{//\ Create\ copy\ of\ array}}
+\DoxyCodeLine{00326\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_array}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{T}}[\_size];}
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{classneo_1_1array}{new\_shape}}\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}[1]\{\_size\};}
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ \_size;\ \mbox{\hyperlink{classneo_1_1array}{i}}++)}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{new\_array}}[\mbox{\hyperlink{classneo_1_1array}{i}}]\ =\ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}];}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tensor}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}(\mbox{\hyperlink{classneo_1_1array}{new\_array}},\ \mbox{\hyperlink{classneo_1_1array}{new\_shape}},\ 1,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tensor}};}
+\DoxyCodeLine{00334\ \}}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00338\ std::ostream\&\ recurse\_ostream(std::ostream\ \&\mbox{\hyperlink{classneo_1_1array}{s}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \&\mbox{\hyperlink{classneo_1_1tensor}{tensor}})\{}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ shape\ =\ \mbox{\hyperlink{classneo_1_1tensor}{tensor}}.shape();}
+\DoxyCodeLine{00341\ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{tensor\_array}}\ =\ \mbox{\hyperlink{classneo_1_1tensor}{tensor}}.array();}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ rank\ =\ \mbox{\hyperlink{classneo_1_1tensor}{tensor}}.rank();}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \ \ \textcolor{keywordflow}{if}\ (rank\ <=\ 1)\{}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ i\ <\ tensor.size();\ i++)\{}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ s<<tensor\_array[i];}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ !=\ (tensor.size()-\/1))\{}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ s<<\textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00351\ \ \ \ \ \}}
+\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00353\ \ \ \}}
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00355\ \ \ std::size\_t\ width\ =\ shape[0];}
+\DoxyCodeLine{00356\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\{\};\ i\ <\ width;\ i++)\{}
+\DoxyCodeLine{00357\ \ \ \ \ s<<\textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{00358\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ lower\_tensor\ =\ tensor.get((\textcolor{keywordtype}{int})i);}
+\DoxyCodeLine{00359\ \ \ \ \ recurse\_ostream(s,\ lower\_tensor);}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{comment}{//s<<lower\_tensor;}}
+\DoxyCodeLine{00361\ \ \ \ \ s<<\textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ !=\ (width-\/1))\{}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ s<<\textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00364\ \ \ \ \ \}}
+\DoxyCodeLine{00365\ \ \ \}}
+\DoxyCodeLine{00366\ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00367\ \}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \textcolor{comment}{//\ Output\ Operator\ <<}}
+\DoxyCodeLine{00370\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00371\ std::ostream\ \&operator<<(std::ostream\ \&s,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \&tensor)\ \{}
+\DoxyCodeLine{00372\ \ \ s<<\textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{00373\ \ \ recurse\_ostream(s,\ tensor);}
+\DoxyCodeLine{00374\ \ \ s<<\textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00375\ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00376\ \}}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \textcolor{comment}{//\ Operator\ Overload}}
+\DoxyCodeLine{00379\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00380\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a5d68ac0c2990e5d3dcbd768a9d729767}{neo::tensor<T>::operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ scalar)\{}
+\DoxyCodeLine{00381\ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{T}}[size()];}
+\DoxyCodeLine{00382\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}[\mbox{\hyperlink{classneo_1_1array}{i}}]\ =\ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ +\ scalar;}
+\DoxyCodeLine{00384\ \ \ \}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tens}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}(\mbox{\hyperlink{classneo_1_1array}{new\_arr}},\ \_shape,\ \_rank,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tens}};}
+\DoxyCodeLine{00389\ \}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00392\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a5d68ac0c2990e5d3dcbd768a9d729767}{neo::tensor<T>::operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1array}{tens}})\{}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ \&\mbox{\hyperlink{classneo_1_1array}{tens}})\{}
+\DoxyCodeLine{00395\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{array}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{T}}[\_size];}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ \_size;\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\{\ \mbox{\hyperlink{classneo_1_1array}{array}}[\mbox{\hyperlink{classneo_1_1array}{i}}]\ =\ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]*2;\ \}}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tens}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}(\mbox{\hyperlink{classneo_1_1array}{array}},\ \_shape,\ \_rank,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tens}};}
+\DoxyCodeLine{00402\ \ \ \}}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \ \ assert\_check(\_rank\ ==\ \mbox{\hyperlink{classneo_1_1array}{tens}}.rank(),\ \textcolor{stringliteral}{"{}Tensors\ must\ be\ the\ same\ rank"{}});}
+\DoxyCodeLine{00406\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{classneo_1_1array}{tens\_shape}}\ =\ \mbox{\hyperlink{classneo_1_1array}{tens}}.shape();}
+\DoxyCodeLine{00407\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ \_rank;\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\{}
+\DoxyCodeLine{00408\ \ \ \ \ assert\_check(\_shape[\mbox{\hyperlink{classneo_1_1array}{i}}]\ ==\ \mbox{\hyperlink{classneo_1_1array}{tens\_shape}}[\mbox{\hyperlink{classneo_1_1array}{i}}],\ \textcolor{stringliteral}{"{}Tensors\ must\ be\ the\ same\ shape"{}});}
+\DoxyCodeLine{00409\ \ \ \}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{T}}[size()];}
+\DoxyCodeLine{00412\ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{tens\_arr}}\ =\ \mbox{\hyperlink{classneo_1_1array}{tens}}.array();}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\{}
+\DoxyCodeLine{00415\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}[\mbox{\hyperlink{classneo_1_1array}{i}}]\ =\ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ +\ \mbox{\hyperlink{classneo_1_1array}{tens\_arr}}[\mbox{\hyperlink{classneo_1_1array}{i}}];}
+\DoxyCodeLine{00416\ \ \ \}}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \ \ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tens}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}(\mbox{\hyperlink{classneo_1_1array}{new\_arr}},\ \_shape,\ \_rank,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tens}};}
+\DoxyCodeLine{00421\ \}}
+\DoxyCodeLine{00422\ }
+\DoxyCodeLine{00423\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00424\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a2c2aa1ad12b4a2d2ccc574c125c77aef}{neo::tensor<T>::operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ scalar)\{}
+\DoxyCodeLine{00425\ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{T}}[size()];}
+\DoxyCodeLine{00426\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\ \{}
+\DoxyCodeLine{00427\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}[\mbox{\hyperlink{classneo_1_1array}{i}}]\ =\ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ *\ scalar;}
+\DoxyCodeLine{00428\ \ \ \}}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00430\ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tens}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}(\mbox{\hyperlink{classneo_1_1array}{new\_arr}},\ \_shape,\ \_rank,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tens}};}
+\DoxyCodeLine{00433\ \}}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00436\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\ \mbox{\hyperlink{classneo_1_1tensor_a686afff17965ef8314ea70a5d69dc5e7}{neo::tensor<T>::operator/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ scalar)\{}
+\DoxyCodeLine{00437\ \ \ assert\_check(scalar\ !=\ 0,\ \textcolor{stringliteral}{"{}Cannot\ divide\ by\ 0"{}});}
+\DoxyCodeLine{00438\ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{T}}[size()];}
+\DoxyCodeLine{00439\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\ \{}
+\DoxyCodeLine{00440\ \ \ \ \ \mbox{\hyperlink{classneo_1_1array}{new\_arr}}[\mbox{\hyperlink{classneo_1_1array}{i}}]\ =\ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ /\ scalar;}
+\DoxyCodeLine{00441\ \ \ \}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \ \ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}*\ \mbox{\hyperlink{classneo_1_1array}{new\_tens}}\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}(\mbox{\hyperlink{classneo_1_1array}{new\_arr}},\ \_shape,\ \_rank,\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1array}{new\_tens}};}
+\DoxyCodeLine{00446\ \}}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00449\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a641f37f007572e747f781ba0ce15ccd7}{neo::tensor<T>::operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ scalar)\{}
+\DoxyCodeLine{00450\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\ \{}
+\DoxyCodeLine{00451\ \ \ \ \ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ +=\ scalar;}
+\DoxyCodeLine{00452\ \ \ \}}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00455\ \}}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00459\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a641f37f007572e747f781ba0ce15ccd7}{neo::tensor<T>::operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1array}{tens}})\{}
+\DoxyCodeLine{00460\ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ ==\ \&\mbox{\hyperlink{classneo_1_1array}{tens}})\{}
+\DoxyCodeLine{00461\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ \_size;\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\{\ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ *=\ 2;\ \}}
+\DoxyCodeLine{00462\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00463\ \ \ \}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \ \ assert\_check(\_rank\ ==\ \mbox{\hyperlink{classneo_1_1array}{tens}}.rank(),\ \textcolor{stringliteral}{"{}Tensors\ must\ be\ the\ same\ rank"{}});}
+\DoxyCodeLine{00466\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{classneo_1_1array}{tens\_shape}}\ =\ \mbox{\hyperlink{classneo_1_1array}{tens}}.shape();}
+\DoxyCodeLine{00467\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ \_rank;\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\{}
+\DoxyCodeLine{00468\ \ \ \ \ assert\_check(\_shape[\mbox{\hyperlink{classneo_1_1array}{i}}]\ ==\ \mbox{\hyperlink{classneo_1_1array}{tens\_shape}}[\mbox{\hyperlink{classneo_1_1array}{i}}],\ \textcolor{stringliteral}{"{}Tensors\ must\ be\ the\ same\ shape"{}});}
+\DoxyCodeLine{00469\ \ \ \}}
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00471\ \ \ \mbox{\hyperlink{classneo_1_1array}{T}}*\ \mbox{\hyperlink{classneo_1_1array}{tens\_arr}}\ =\ \mbox{\hyperlink{classneo_1_1array}{tens}}.array();}
+\DoxyCodeLine{00472\ }
+\DoxyCodeLine{00473\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\{}
+\DoxyCodeLine{00474\ \ \ \ \ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ +=\ \mbox{\hyperlink{classneo_1_1array}{tens\_arr}}[\mbox{\hyperlink{classneo_1_1array}{i}}];}
+\DoxyCodeLine{00475\ \ \ \}}
+\DoxyCodeLine{00476\ }
+\DoxyCodeLine{00477\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00478\ \}}
+\DoxyCodeLine{00479\ }
+\DoxyCodeLine{00480\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00481\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_a221a3122c5e16892d4ae09682b342fc7}{neo::tensor<T>::operator*=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ scalar)\{}
+\DoxyCodeLine{00482\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\ \{}
+\DoxyCodeLine{00483\ \ \ \ \ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ *=\ scalar;}
+\DoxyCodeLine{00484\ \ \ \}}
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00486\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00487\ \}}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00489\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00490\ \mbox{\hyperlink{classneo_1_1array}{neo::tensor<T>}}\&\ \mbox{\hyperlink{classneo_1_1tensor_acab2861fb8040d2b9dd90c17e8830e81}{neo::tensor<T>::operator/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1array}{T}}\ scalar)\{}
+\DoxyCodeLine{00491\ \ \ assert\_check(scalar\ !=\ 0,\ \textcolor{stringliteral}{"{}Cannot\ divide\ by\ 0"{}});}
+\DoxyCodeLine{00492\ }
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00494\ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ \mbox{\hyperlink{classneo_1_1array}{i}}\{\};\ \mbox{\hyperlink{classneo_1_1array}{i}}\ <\ size();\ \mbox{\hyperlink{classneo_1_1array}{i}}++)\ \{}
+\DoxyCodeLine{00495\ \ \ \ \ \_array[\mbox{\hyperlink{classneo_1_1array}{i}}]\ /=\ scalar;}
+\DoxyCodeLine{00496\ \ \ \}}
+\DoxyCodeLine{00497\ }
+\DoxyCodeLine{00498\ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00499\ \}}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00501\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//NEO\_TENSOR\_HPP}}
+
+\end{DoxyCode}
